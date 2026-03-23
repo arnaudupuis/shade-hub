@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shade Hub — Farmforce Marketing Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --teal: #005059;
+      --gold: #FDBB27;
+      --cream: #F3F0EE;
+      --tan: #f2e8da;
+      --navy: #0f2336;
+      --muted: #655957;
+      --border: #e0ddd8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--navy); }
+
+    /* ── Header ── */
+    header {
+      background: var(--teal);
+      padding: 32px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    header .logo-area { display: flex; align-items: center; gap: 20px; }
+    header svg { height: 36px; }
+    header .divider { width: 1px; height: 36px; background: rgba(255,255,255,0.3); }
+    header .tagline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      text-transform: uppercase;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+    header .sub { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+    .gold-bar { height: 4px; background: var(--gold); }
+
+    /* ── Hero ── */
+    .hero {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 48px 48px 40px;
+    }
+    .hero h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 40px;
+      text-transform: uppercase;
+      color: var(--navy);
+      letter-spacing: 0.02em;
+      margin-bottom: 12px;
+    }
+    .hero p { font-size: 15px; color: var(--muted); max-width: 600px; line-height: 1.6; }
+
+    /* ── Stats bar ── */
+    .stats {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      background: white;
+    }
+    .stat {
+      flex: 1;
+      padding: 20px 32px;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+    .stat .num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 32px;
+      color: var(--teal);
+    }
+    .stat .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+
+    /* ── Main grid ── */
+    main { padding: 48px; max-width: 1200px; margin: 0 auto; }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .category-card {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .category-card:hover { border-color: var(--teal); box-shadow: 0 2px 12px rgba(0,80,89,0.08); }
+    .cat-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--tan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .cat-body h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .cat-body p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .cat-count {
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--teal);
+      font-weight: 600;
+    }
+
+    /* ── Recent files ── */
+    .recent-table { width: 100%; border-collapse: collapse; background: white; border: 1px solid var(--border); }
+    .recent-table th {
+      text-align: left;
+      padding: 12px 16px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      background: var(--tan);
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+    }
+    .recent-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .recent-table tr:last-child td { border-bottom: none; }
+    .recent-table tr:hover td { background: var(--cream); }
+    .file-link { color: var(--teal); text-decoration: none; font-weight: 500; }
+    .file-link:hover { text-decoration: underline; }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .badge-html { background: #e8f4f1; color: var(--teal); }
+    .badge-pdf  { background: #fff3e0; color: #b45309; }
+    .badge-pptx { background: #fef3f2; color: #b91c1c; }
+    .badge-xlsx { background: #f0fdf4; color: #166534; }
+
+    .empty-state {
+      padding: 48px;
+      text-align: center;
+      color: var(--muted);
+      background: white;
+      border: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .empty-state strong { display: block; font-size: 16px; color: var(--navy); margin-bottom: 8px; }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 64px;
+      background: var(--navy);
+      color: rgba(255,255,255,0.5);
+      padding: 24px 48px;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo-area">
+    <!-- Farmforce logo (white) -->
+    <svg viewBox="0 0 112 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 5.6h16.8v5.6H5.6v5.6h8.4v5.6H5.6V36H0V5.6z" fill="#fff"/>
+      <path d="M18.9 5.6h5.6v24.8h8.4V36H18.9V5.6z" fill="#fff"/>
+      <path d="M35.7 5.6h16.8v5.6h-11.2v5.6h8.4v5.6h-8.4v5.6h11.2V36H35.7V5.6z" fill="#fff"/>
+      <path d="M56.7 5.6h5.6L67.9 20l5.6-14.4h5.6V36H73.5V17.6L67.9 32h-1.4l-5.6-14.4V36h-4.2V5.6z" fill="#fff"/>
+      <path d="M82.95 5.6h5.6l8.4 30.4h-5.6l-1.4-5.6h-8.4l-1.4 5.6h-5.6l8.4-30.4zm2.8 9.6l-2.8 9.6h5.6l-2.8-9.6z" fill="#fff"/>
+      <path d="M99.75 5.6h8.4c4.64 0 5.6 2.8 5.6 7 0 3.36-1.12 5.6-3.36 6.44L114 36h-5.6l-3.36-15.4h-1.68V36h-5.6V5.6zm5.6 9.8h2.8c1.12 0 1.4-.56 1.4-2.8s-.28-2.8-1.4-2.8h-2.8v5.6z" fill="#fff"/>
+    </svg>
+    <div class="divider"></div>
+    <div>
+      <div class="tagline">Shade Hub</div>
+      <div class="sub">Marketing Intelligence · Farmforce</div>
+    </div>
+  </div>
+  <div style="color:rgba(255,255,255,0.4); font-size:13px;">
+    <a href="https://github.com/arnaudupuis/shade-hub" style="color:rgba(255,255,255,0.5); text-decoration:none;">
+      ↗ GitHub Repository
+    </a>
+  </div>
+</header>
+<div class="gold-bar"></div>
+
+<div class="hero">
+  <h1>Intelligence Hub</h1>
+  <p>All Shade-generated outputs in one place — account analyses, weekly newsletters, sales decks, and more. Click any file for a shareable link.</p>
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <div class="num" id="count-total">—</div>
+    <div class="label">Total outputs</div>
+  </div>
+  <div class="stat">
+    <div class="num" id="count-accounts">—</div>
+    <div class="label">Account analyses</div>
+  </div>
+  <div class="stat">
+    <div class="num" id="count-newsletters">—</div>
+    <div class="label">Newsletters</div>
+  </div>
+  <div class="stat">
+    <div class="num" id="count-decks">—</div>
+    <div class="label">Decks &amp; docs</div>
+  </div>
+</div>
+
+<main>
+  <div class="section-title">Browse by category</div>
+  <div class="category-grid">
+    <a class="category-card" href="accounts/">
+      <div class="cat-icon">🏢</div>
+      <div class="cat-body">
+        <h3>Account Analyses</h3>
+        <p>Full intelligence briefs on cocoa, coffee, and rubber companies.</p>
+        <div class="cat-count" id="link-accounts">Explore →</div>
+      </div>
+    </a>
+    <a class="category-card" href="newsletters/">
+      <div class="cat-icon">📰</div>
+      <div class="cat-body">
+        <h3>Unshaded Reports</h3>
+        <p>Weekly pipeline intelligence and industry watch newsletters.</p>
+        <div class="cat-count" id="link-newsletters">Explore →</div>
+      </div>
+    </a>
+    <a class="category-card" href="decks/">
+      <div class="cat-icon">📊</div>
+      <div class="cat-body">
+        <h3>Decks &amp; Proposals</h3>
+        <p>Sales presentations, commercial proposals, and pitch materials.</p>
+        <div class="cat-count" id="link-decks">Explore →</div>
+      </div>
+    </a>
+    <a class="category-card" href="action-plans/">
+      <div class="cat-icon">🎯</div>
+      <div class="cat-body">
+        <h3>Action Plans</h3>
+        <p>Segment-specific and account-level outreach plans.</p>
+        <div class="cat-count" id="link-plans">Explore →</div>
+      </div>
+    </a>
+    <a class="category-card" href="pdfs/">
+      <div class="cat-icon">📄</div>
+      <div class="cat-body">
+        <h3>PDFs &amp; Briefs</h3>
+        <p>Executive summaries, one-pagers, and formatted reports.</p>
+        <div class="cat-count" id="link-pdfs">Explore →</div>
+      </div>
+    </a>
+    <a class="category-card" href="other/">
+      <div class="cat-icon">📁</div>
+      <div class="cat-body">
+        <h3>Other Outputs</h3>
+        <p>Spreadsheets, ICP analyses, and miscellaneous files.</p>
+        <div class="cat-count" id="link-other">Explore →</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="section-title">Recent outputs</div>
+  <div id="recent-container">
+    <div class="empty-state">
+      <strong>No files yet</strong>
+      Ask Shade to publish outputs here and they'll appear automatically.
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span>Shade Hub · Farmforce Marketing Intelligence · <a href="https://farmforce.com">farmforce.com</a></span>
+  <span id="last-updated">Updated —</span>
+</footer>
+
+<script>
+// Load the manifest and populate the page
+async function loadManifest() {
+  try {
+    const r = await fetch('manifest.json?t=' + Date.now());
+    if (!r.ok) return;
+    const manifest = await r.json();
+    const files = manifest.files || [];
+
+    // Stats
+    const accounts   = files.filter(f => f.category === 'accounts');
+    const newsletters = files.filter(f => f.category === 'newsletters');
+    const decks      = files.filter(f => f.category === 'decks');
+
+    document.getElementById('count-total').textContent = files.length;
+    document.getElementById('count-accounts').textContent = accounts.length;
+    document.getElementById('count-newsletters').textContent = newsletters.length;
+    document.getElementById('count-decks').textContent = decks.length;
+
+    document.getElementById('link-accounts').textContent    = `${accounts.length} file${accounts.length!==1?'s':''} →`;
+    document.getElementById('link-newsletters').textContent = `${newsletters.length} file${newsletters.length!==1?'s':''} →`;
+    document.getElementById('link-decks').textContent       = `${decks.length} file${decks.length!==1?'s':''} →`;
+
+    // Last updated
+    if (manifest.lastUpdated) {
+      document.getElementById('last-updated').textContent = 'Updated ' + new Date(manifest.lastUpdated).toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'});
+    }
+
+    // Recent files table
+    if (files.length > 0) {
+      const recent = [...files].sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0, 15);
+      const badgeClass = ext => ({ html:'badge-html', pdf:'badge-pdf', pptx:'badge-pptx', xlsx:'badge-xlsx' }[ext] || 'badge-html');
+      const rows = recent.map(f => `
+        <tr>
+          <td><a class="file-link" href="${f.url}" target="_blank">${f.title}</a></td>
+          <td><span class="badge ${badgeClass(f.type)}">${f.type.toUpperCase()}</span></td>
+          <td style="color:var(--muted)">${f.category}</td>
+          <td style="color:var(--muted)">${new Date(f.date).toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'})}</td>
+        </tr>`).join('');
+      document.getElementById('recent-container').innerHTML = `
+        <table class="recent-table">
+          <thead><tr><th>File</th><th>Type</th><th>Category</th><th>Published</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>`;
+    }
+  } catch(e) { /* manifest not yet created — empty state stays */ }
+}
+loadManifest();
+</script>
+</body>
+</html>
