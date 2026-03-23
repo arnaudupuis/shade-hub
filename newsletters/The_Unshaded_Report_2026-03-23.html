@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Unshaded Report #1 — Week of March 23, 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #092435;
+            --gold: #fdbb27;
+            --cream: #f8f6f3;
+            --text: #1a1a1a;
+            --red: #dc3545;
+            --muted: #666;
+            --border-light: #e0e0e0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--cream);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--navy);
+            color: white;
+            padding: 2rem 2rem 1.5rem;
+            text-align: center;
+        }
+
+        .logo-container {
+            margin-bottom: 0.75rem;
+        }
+
+        .report-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .report-date {
+            font-size: 1rem;
+            color: #ccc;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            font-size: 0.95rem;
+            color: var(--gold);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .report-meta {
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--navy);
+            display: flex;
+            gap: 0;
+            padding: 0;
+            overflow-x: auto;
+            z-index: 100;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav a:hover {
+            background-color: rgba(253, 187, 39, 0.1);
+            color: var(--gold);
+            border-bottom-color: var(--gold);
+        }
+
+        nav a.active {
+            color: var(--gold);
+            border-bottom-color: var(--gold);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 2rem 3rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        section details {
+            padding: 0;
+        }
+
+        section summary {
+            background-color: white;
+            padding: 1.5rem;
+            cursor: pointer;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text);
+            user-select: none;
+            border-left: 4px solid var(--gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s ease;
+        }
+
+        section summary:hover {
+            background-color: #fafafa;
+        }
+
+        section summary::marker {
+            color: var(--gold);
+        }
+
+        section details[open] summary {
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .section-content {
+            padding: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        /* Metric Cards */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #f8f6f3 0%, #ffffff 100%);
+            padding: 1.5rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--gold);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-note {
+            font-size: 0.8rem;
+            color: var(--muted);
+            line-height: 1.4;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        thead {
+            background-color: #fafafa;
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        th {
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        tbody tr:hover {
+            background-color: #fafafa;
+        }
+
+        .deal-note {
+            font-size: 0.85rem;
+            color: var(--muted);
+            font-style: italic;
+            padding-left: 1.5rem;
+            margin-top: 0.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .warning {
+            color: var(--red);
+            font-weight: 600;
+        }
+
+        .muted-text {
+            color: var(--muted);
+        }
+
+        /* Deal Tables */
+        .deal-table {
+            margin-bottom: 2rem;
+        }
+
+        .deal-table h4 {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .deal-row {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Callout Boxes */
+        .callout {
+            background-color: #fff3cd;
+            border-left: 4px solid var(--gold);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+        }
+
+        .callout-info {
+            background-color: #d1ecf1;
+            border-left-color: #17a2b8;
+        }
+
+        .callout.warning-box {
+            background-color: #f8d7da;
+            border-left-color: var(--red);
+        }
+
+        .callout p {
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Customer Signal Cards */
+        .signal-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .signal-card {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            padding: 1.25rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--gold);
+            transition: box-shadow 0.2s ease;
+        }
+
+        .signal-card:hover {
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .signal-card.active {
+            border-left-color: #28a745;
+        }
+
+        .signal-card.new {
+            border-left-color: #17a2b8;
+        }
+
+        .signal-card.deal {
+            border-left-color: var(--gold);
+        }
+
+        .signal-company {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .signal-badge {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+
+        .signal-text {
+            font-size: 0.9rem;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .signal-date {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        /* Contact Table */
+        .contact-table table {
+            font-size: 0.9rem;
+        }
+
+        /* Feedback Textarea */
+        .feedback-section {
+            margin-top: 1.5rem;
+            border-top: 1px solid var(--border-light);
+            padding-top: 1.5rem;
+        }
+
+        .feedback-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .feedback-textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 0.75rem;
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.9rem;
+            resize: vertical;
+        }
+
+        .feedback-textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(253, 187, 39, 0.1);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin: 2rem 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 40px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .progress-current {
+            height: 100%;
+            background-color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--navy);
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: width 0.3s ease;
+        }
+
+        .progress-target {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--red);
+            z-index: 10;
+        }
+
+        .progress-target::before {
+            content: '$240K';
+            position: absolute;
+            right: -2.5rem;
+            top: -2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--red);
+            white-space: nowrap;
+        }
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            color: var(--muted);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--navy);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .footer-credit {
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+
+        .footer-meta {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-top: 1rem;
+        }
+
+        /* Export Button */
+        .export-container {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background-color: #fafafa;
+            border-radius: 6px;
+        }
+
+        .export-btn {
+            background-color: var(--gold);
+            color: var(--navy);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .export-btn:hover {
+            background-color: #fca823;
+            box-shadow: 0 2px 6px rgba(253, 187, 39, 0.3);
+        }
+
+        .export-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                padding: 0.75rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            main {
+                padding: 100px 1rem 2rem;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .signal-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            section summary {
+                font-size: 1.1rem;
+                padding: 1rem;
+            }
+
+            .section-content {
+                padding: 1rem;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 0.5rem;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background-color: var(--gold);
+            color: var(--navy);
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 36" width="168" height="54"><path fill="#fff" d="M0,24.2c0.1-0.7,0.3-1.4,0.4-2.1c0-0.2,0.1-0.3,0.1-0.5c0.6,0,1.3-0.1,2-0.1c0.1-0.5,0.2-1.1,0.3-1.6 c0.4-2.4,1.9-4,4.3-4.4c1.1-0.2,2.1,0,3.2,0.2c-0.1,1-0.2,2-0.3,3c-1.1-0.3-2.1-0.3-3,0.6c-0.4,0.4-0.7,1.5-0.7,2.3 c0.9,0,1.7,0,2.6,0c-0.2,0.9-0.3,1.8-0.5,2.8c-0.9,0-1.7,0-2.6,0c-0.6,3.8-1.3,7.5-1.9,11.3c-1.3,0-2.5,0-3.7,0 c0.6-3.7,1.3-7.5,1.9-11.3c-0.7,0-1.3,0-2,0C0,24.4,0,24.3,0,24.2z M42.6,35.7c-1.2,0-2.4,0-3.7,0c0.1-0.6,0.2-1.2,0.3-1.8 c0.2-1.1,0.4-2.2,0.5-3.3c0.2-1.1,0.4-2.2,0.5-3.3c0.1-0.5,0.1-1.1,0.1-1.7c0-0.7-0.7-1.2-1.5-1.2c-0.9,0.1-1.7,0.5-2.2,1.3 c-0.2,0.3-0.2,0.7-0.3,1c-0.3,1.8-0.6,3.5-0.9,5.3c-0.2,1.2-0.4,2.4-0.6,3.7c-1.2,0-2.5,0-3.7,0c0.8-4.7,1.6-9.4,2.4-14.1 c1.1,0,2.2,0,3.4,0c-0.1,0.4-0.1,0.8-0.2,1.3c0.2-0.1,0.3-0.2,0.4-0.3c0.8-0.7,1.7-1.1,2.8-1.2c0.8-0.1,1.5,0,2.2,0.2 c0.8,0.3,1.4,0.9,1.8,1.8c0.4-0.3,0.7-0.7,1.2-1c0.7-0.5,1.6-0.9,2.5-1c0.8-0.1,1.5,0,2.2,0.3c1.1,0.5,1.7,1.4,2,2.6 c0.3,1.1,0.2,2.3,0,3.4s-0.4,2.2-0.6,3.3c-0.2,1.1-0.4,2.2-0.5,3.3c-0.1,0.5-0.1,1-0.2,1.5c-1.2,0-2.4,0-3.7,0 c0.1-0.4,0.1-0.9,0.2-1.3c0.2-1.1,0.4-2.2,0.6-3.3c0.2-1.1,0.4-2.2,0.5-3.3c0.1-0.7,0.2-1.4,0.2-2.1c0-1-0.9-1.4-1.8-1.3 c-0.9,0.1-1.6,0.7-2,1.5c-0.2,0.3-0.2,0.8-0.3,1.2c-0.2,1.2-0.4,2.5-0.6,3.7c-0.2,1.2-0.4,2.4-0.6,3.6 C42.7,34.9,42.7,35.2,42.6,35.7z M64,15.7c-0.1,1-0.2,2-0.3,3c-1-0.3-1.9-0.3-2.7,0.4c-0.8,0.6-0.8,1.6-1,2.6c0.9,0,1.7,0,2.7,0 c-0.2,0.9-0.3,1.8-0.5,2.8c-0.9,0-1.8,0-2.6,0c-0.2,1.3-0.5,2.6-0.7,3.9c-0.2,1.4-0.4,2.8-0.7,4.1c-0.2,1-0.3,2-0.5,3 c0,0.1-0.2,0.2-0.3,0.2c-1.1,0-2.3,0-3.5,0c0.6-3.8,1.3-7.5,1.9-11.3c-0.6,0-1.3,0-2,0c0.1-0.4,0.1-0.8,0.2-1.2 c0.1-0.4,0.1-0.8,0.2-1.3c0-0.1,0.2-0.3,0.3-0.3c0.6-0.1,1.1-0.1,1.7-0.1c0.2-0.9,0.3-1.8,0.6-2.7c0.6-1.8,1.9-2.9,3.7-3.3 C61.7,15.3,62.8,15.5,64,15.7z M31.9,21.5c-0.2,1.2-0.3,2.4-0.5,3.6c-0.6,0-1.1,0-1.6,0c-1.1,0-2,0.5-2.6,1.3 c-0.3,0.4-0.3,0.9-0.3,1.4c-0.2,1.2-0.4,2.4-0.6,3.5c-0.2,1.1-0.4,2.1-0.6,3.2c-0.1,0.4-0.1,0.8-0.2,1.1c-1.2,0-2.5,0-3.7,0 c0.8-4.7,1.6-9.4,2.4-14.1c1.2,0,2.3,0,3.5,0c-0.1,0.5-0.2,0.9-0.3,1.5C28.7,21.5,30.1,21,31.9,21.5z M86.3,21.5 c-0.2,1.2-0.3,2.4-0.5,3.6c-0.6,0-1.2,0-1.8,0c-1,0.1-1.9,0.5-2.4,1.4c-0.2,0.3-0.2,0.8-0.3,1.2c-0.2,1.2-0.4,2.5-0.6,3.7 s-0.4,2.4-0.6,3.5c0,0.2,0,0.4-0.1,0.6c0,0.1-0.1,0.2-0.2,0.2c-1.2,0-2.3,0-3.5,0c0.8-4.7,1.6-9.4,2.4-14.1c1.2,0,2.3,0,3.5,0 C82.1,22,82,22.5,81.9,23C83.1,21.5,84.5,21,86.3,21.5z M56.4,0c0.1,0.5,0.3,1,0.4,1.5c0.1,0.3,0.2,0.7,0.3,1s0,0.4-0.3,0.5 c-1.8,0.3-3.4,1-4.9,2c-1.1,0.7-2.1,1.5-3,2.4c-1.3,1.3-2.4,2.8-3.1,4.5c-0.5,1.1-0.8,2.3-1.2,3.4c-0.1,0.3-0.2,0.3-0.4,0.2 c-0.7-0.2-1.4-0.4-2.1-0.6c-0.2-0.1-0.3-0.2-0.3-0.4c0.6-2.6,1.6-4.9,3.2-7c0.7-0.9,1.5-1.8,2.3-2.7c1-1.1,2.2-1.9,3.5-2.6 c1.7-1,3.4-1.7,5.3-2.1C56.1,0.1,56.2,0,56.4,0z M58.5,7.9c-4.9,1.1-7.9,4.1-9,9c-0.7-0.2-1.4-0.4-2.1-0.6c-0.5-0.1-0.5-0.2-0.4-0.7 c0.4-2,1.3-3.9,2.6-5.5c1-1.3,2.2-2.4,3.6-3.2c1.4-0.8,2.8-1.4,4.3-1.7c0.2,0,0.3,0,0.4,0.2C58,6.2,58.2,7,58.5,7.9z M54.7,18.3 c-0.8-0.2-1.7-0.4-2.5-0.7c-0.3,0-0.2-0.3-0.2-0.6c0.1-0.4,0.2-0.9,0.4-1.3c0.5-1.4,1.4-2.6,2.5-3.6c1-0.9,2.2-1.4,3.5-1.7 c0.2,0,0.4-0.1,0.6-0.1c0.2,0.9,0.5,1.9,0.8,2.8C56.7,13.4,54.9,15.9,54.7,18.3z M20.6,24.9c-0.3-1.5-1.1-2.5-2.5-3.1 c-1-0.4-2-0.5-3-0.4c-1.8,0.1-3.3,0.7-4.5,2.1C10,24.2,9.7,25,9.8,25.9c1.2,0,2.3,0,3.5,0c0.1,0,0.2-0.1,0.2-0.2 c0.2-0.8,0.8-1.2,1.6-1.4c0.7-0.2,1.7,0.2,1.9,0.9c0.1,0.6,0,1.3-0.2,1.9c-0.6,0-1.1,0-1.7,0c-1.3,0-2.6,0.1-3.8,0.7 C10,28.4,9,29.2,8.6,30.6c-0.3,1-0.4,2,0.1,3c0.9,2,3.1,2.8,5,2.3c0.9-0.2,1.6-0.6,2.3-1.3c0,0.3,0.1,0.6,0.1,0.8 c0,0.1,0.2,0.3,0.3,0.3c1.1,0,2.3,0,3.5,0c0-0.1,0-0.2-0.1-0.3c-0.2-0.7-0.3-1.4-0.1-2.1c0.2-0.8,0.2-1.5,0.3-2.3c0.2-1,0.3-2,0.5-3 C20.5,26.9,20.8,26,20.6,24.9z M16.1,31.4c-0.1,0.4-0.5,0.7-0.8,0.9c-0.6,0.5-1.3,0.7-2.1,0.6c-0.8-0.1-1.3-0.7-1.1-1.5 c0.3-1.2,1.2-2,2.5-2.1c0.3,0,0.7-0.1,1-0.1s0.6,0,1,0C16.3,30,16.3,30.8,16.1,31.4z M75,25.3c-0.4-1.5-1.3-2.6-2.6-3.3 c-1.1-0.6-2.2-0.7-3.4-0.6c-1.4,0.1-2.6,0.6-3.6,1.5c-1.9,1.7-2.7,3.9-2.8,6.4c-0.1,0.8,0,1.6,0.2,2.4c0.3,1.3,0.9,2.4,2,3.2 c1.5,1.1,3.2,1.3,5,0.9c1.7-0.3,3-1.3,4-2.7c1.2-1.6,1.7-3.5,1.6-5.7C75.4,26.8,75.3,26.1,75,25.3z M70.7,31.5 c-0.8,1.3-2.5,1.9-3.7,1c-0.5-0.4-0.7-1-0.8-1.6c-0.2-1.3-0.1-2.7,0.4-3.9c0.4-1.1,1-2,2.1-2.3c1.5-0.4,2.6,0.4,2.8,1.9 c0.1,0.4,0.1,0.7,0.1,1.1C71.6,29,71.4,30.3,70.7,31.5z M96.8,26.9c-0.5,0-1.7,0-1.7,0s0-0.1,0-0.3c-0.1-0.8-0.3-1.6-1.1-2 c-1-0.5-2.3,0-2.8,0.8c-0.6,0.9-0.8,1.9-1,2.9c-0.1,0.8-0.2,1.5-0.2,2.3c0,0.6,0.2,1.2,0.5,1.7c0.7,0.8,2.1,0.8,2.9,0 c0.4-0.4,0.7-0.8,0.8-1.4c0-0.2,0-0.2,0-0.2h3.5c0,0,0,0.1,0,0.3c-0.1,1-0.4,1.9-1,2.7c-0.9,1.2-2.2,1.9-3.6,2.2 c-1.5,0.3-3,0.2-4.3-0.7c-1.3-0.8-2.1-2.1-2.4-3.7c-0.1-0.6-0.2-1.2-0.2-1.8c0.1-1.5,0.3-3.1,1-4.5c0.8-1.6,2-2.9,3.7-3.4 c1.8-0.6,3.7-0.6,5.4,0.5c1.2,0.8,1.7,1.9,2,3.2c0.1,0.4,0.1,0.8,0.1,1.2c0,0.2,0,0.3,0,0.3S97.3,26.9,96.8,26.9z M111.8,29.1 c0.2-1.3,0.3-2.6,0-3.8c-0.3-1.2-0.9-2.3-2-3.1c-1.3-0.9-2.8-1.1-4.3-0.8c-1.7,0.3-3,1.1-4.1,2.5c-1.7,2.2-2.2,4.8-1.7,7.5 c0.6,2.8,2.8,4.3,5.3,4.5c0.8,0.1,1.7,0,2.5-0.3c1.3-0.4,2.4-1,3.2-2c0.1-0.1,0.2-0.2,0.2-0.2l-1.7-2.1c0,0,0,0-0.2,0.2 c-0.7,0.7-1.4,1.1-2.4,1.3c-1.9,0.4-3.2-0.6-3.4-2.5c0-0.3,0-0.4,0.3-0.4c1.3,0,2.6,0,3.9,0c1.1,0,3,0,4.2,0L111.8,29.1z M107.4,27.3c-1.3,0-2.5,0-3.8,0c0.2-0.7,0.5-1.3,0.9-1.8c0.7-0.9,2.1-1.5,3.3-0.6c0.4,0.3,0.6,0.7,0.7,1.3 C108.5,27.3,108.5,27.3,107.4,27.3z"></path></svg>
+        </div>
+        <div class="report-title">The Unshaded Report #1</div>
+        <div class="report-date">Week of March 23, 2026</div>
+        <div class="tagline">Forget grey. Shade only sees green.</div>
+        <div class="report-meta">Marketing Intelligence <span class="version-badge">v1.0</span></div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav id="nav-bar">
+        <a href="#mor-snapshot" class="nav-link active">MOR Snapshot</a>
+        <a href="#pipeline-health" class="nav-link">Pipeline Health</a>
+        <a href="#revenue-forecast" class="nav-link">Revenue Forecast</a>
+        <a href="#customer-pulse" class="nav-link">Customer Pulse</a>
+        <a href="#prospect-activity" class="nav-link">Prospect Activity</a>
+        <a href="#data-quality" class="nav-link">Data Quality</a>
+        <a href="#industry-watch" class="nav-link">Industry Watch</a>
+        <a href="#product-updates" class="nav-link">Product Updates</a>
+        <a href="#shades-top3" class="nav-link">Shade's Top 3</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- SECTION 1: MOR Snapshot -->
+        <section id="mor-snapshot">
+            <details open>
+                <summary>MOR Snapshot (Monthly Operating Review)</summary>
+                <div class="section-content">
+                    <h3>Sales Pipeline Metrics</h3>
+                    <div class="metrics-grid" style="grid-template-columns: 1fr 1fr;">
+                        <div class="metric-card">
+                            <div class="metric-label">Total Pipeline</div>
+                            <div class="metric-value">$5,797,938</div>
+                            <div class="metric-note">Sales Pipeline — all open deals</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Total Pipeline — Weighted</div>
+                            <div class="metric-value">$1,351,397</div>
+                            <div class="metric-note">Forecast Amount</div>
+                        </div>
+                    </div>
+                    <div class="metrics-grid" style="grid-template-columns: 1fr 1fr; margin-top: 1rem;">
+                        <div class="metric-card">
+                            <div class="metric-label">Total MRR Pipeline</div>
+                            <div class="metric-value">$371,477</div>
+                            <div class="metric-note">Recurring Revenue Amount</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Total MRR Pipeline — Weighted</div>
+                            <div class="metric-value">$54,413</div>
+                            <div class="metric-note">Forecast Recurring Revenue</div>
+                        </div>
+                    </div>
+
+                    <h3>New Customers & Upsells Won YTD</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                        <div class="deal-table">
+                            <h4>New Customers (2)</h4>
+                            <table>
+                                <thead><tr><th>Deal</th><th>Amount</th><th>Closed</th></tr></thead>
+                                <tbody>
+                                    <tr><td>CCA Cashew Pilot</td><td>$44,600</td><td>Mar 11</td></tr>
+                                    <tr><td>Aroma Cacao</td><td>$12,000</td><td>Feb 4</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="deal-table">
+                            <h4>Upsells (1)</h4>
+                            <table>
+                                <thead><tr><th>Deal</th><th>Amount</th><th>Closed</th></tr></thead>
+                                <tbody>
+                                    <tr><td>BC Phase 2 India</td><td>$72,500</td><td>Feb 28</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="feedback-section">
+                        <label class="feedback-label">Feedback for MOR Snapshot</label>
+                        <textarea class="feedback-textarea" data-section="mor-snapshot" placeholder="Add your notes or observations here..."></textarea>
+                    </div>
+                </div>
+            </details>
+        </section>
+
+        <!-- SECTION 2: Pipeline Health -->
+        <section id="pipeline-health">
+            <details open>
+                <summary>Pipeline Health — Next Quarter Focus (April–June 2026)</summary>
+                <div class="section-content">
+                    <p style="margin-bottom: 1.5rem; color: var(--muted);">Q2 2026 deals ordered by pipeline stage. Deals closing within 3 months but still at an early stage (Prospecting, Engaged, Qualification) are flagged as at-risk.</p>
+
+                    <!-- Negotiation -->
+                    <h3 style="margin-top: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--gold);">Negotiation</h3>
+                    <table>
+                        <thead>
+                            <tr><th>Deal Name</th><th>Owner</th><th>Close Date</th><th style="text-align: right;">Amount</th><th>Comment</th><th>Link</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tropicore EUDR</td>
+                                <td>HC Fleischer</td>
+                                <td>May 31</td>
+                                <td style="text-align: right;">$37,680</td>
+                                <td style="font-size: 0.85rem; color: var(--muted);">Closest to signature after BC Go Live 3</td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/43635650180" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                            <tr>
+                                <td>SNV Indonesia SAFE Cocoa</td>
+                                <td>BD Lead</td>
+                                <td>May 29</td>
+                                <td style="text-align: right;">$20,000</td>
+                                <td></td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/50712767754" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Proposal -->
+                    <h3 style="margin-top: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--gold);">Proposal</h3>
+                    <p style="color: var(--muted); margin-bottom: 1rem; font-size: 0.9rem;">No Q2 deals at Proposal stage.</p>
+
+                    <!-- Demo -->
+                    <h3 style="margin-top: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--gold);">Demo</h3>
+                    <table>
+                        <thead>
+                            <tr><th>Deal Name</th><th>Owner</th><th>Close Date</th><th style="text-align: right;">Amount</th><th>Comment</th><th>Link</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Cargill Farmer App Pilot</td>
+                                <td>HC Fleischer</td>
+                                <td>Jun 1</td>
+                                <td style="text-align: right;">$24,840</td>
+                                <td style="font-size: 0.85rem; color: var(--muted);">New contact jayanta_hazarika@cargill.com added this week</td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/10140342658" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                            <tr>
+                                <td>AMEROPA Rubber EUDR</td>
+                                <td>BD Lead</td>
+                                <td>May 28</td>
+                                <td style="text-align: right;">$13,800</td>
+                                <td></td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/17212922888" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                            <tr>
+                                <td>JYN Group Coffee Indonesia</td>
+                                <td><span class="warning">Unassigned</span></td>
+                                <td>May 1</td>
+                                <td style="text-align: right;">$9,000</td>
+                                <td></td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/29824330423" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Qualification — AT RISK -->
+                    <h3 style="margin-top: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--red);">Qualification <span class="warning" style="font-size: 0.8rem;">⚠️ AT RISK — early stage, closing soon</span></h3>
+                    <table>
+                        <thead>
+                            <tr><th>Deal Name</th><th>Owner</th><th>Close Date</th><th style="text-align: right;">Amount</th><th>Comment</th><th>Link</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Volcafe Coffee Traceability</strong></td>
+                                <td><span class="warning">Unassigned</span></td>
+                                <td>Jun 30</td>
+                                <td style="text-align: right;"><strong>$259,000</strong></td>
+                                <td style="font-size: 0.85rem; color: var(--red);">Biggest unassigned deal in the pipeline</td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/14951900854" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                            <tr>
+                                <td>Fairoils Additional Users</td>
+                                <td>BD Lead</td>
+                                <td><span class="warning">Mar 31 (OVERDUE)</span></td>
+                                <td style="text-align: right;">$6,000</td>
+                                <td style="font-size: 0.85rem; color: var(--red);">Past due — close or move to lost</td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/41176929390" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                            <tr>
+                                <td>SIAT Palm Nigeria</td>
+                                <td><span class="warning">Unassigned</span></td>
+                                <td>Jun 1</td>
+                                <td style="text-align: right;">$20,976</td>
+                                <td></td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/17809804417" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                            <tr>
+                                <td>ADM Capital</td>
+                                <td><span class="warning">Unassigned</span></td>
+                                <td>May 1</td>
+                                <td style="text-align: right;">$15,000</td>
+                                <td></td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/51020359470" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Engaged — AT RISK -->
+                    <h3 style="margin-top: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--red);">Engaged <span class="warning" style="font-size: 0.8rem;">⚠️ AT RISK — early stage, closing soon</span></h3>
+                    <table>
+                        <thead>
+                            <tr><th>Deal Name</th><th>Owner</th><th>Close Date</th><th style="text-align: right;">Amount</th><th>Comment</th><th>Link</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>CCA Cotton Phase 1</strong></td>
+                                <td>HC Fleischer</td>
+                                <td>Jun 1</td>
+                                <td style="text-align: right;"><strong>$524,720</strong></td>
+                                <td style="font-size: 0.85rem; color: var(--muted);">Largest Q2 deal. CCA Cashew pilot won Mar 11 — logical next step</td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/50749351719" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Barry Callebaut Go Live 3 Q2 2026 (IC & NG)</strong></td>
+                                <td>HC Fleischer</td>
+                                <td>Apr 1</td>
+                                <td style="text-align: right;"><strong>$190,800</strong></td>
+                                <td style="font-size: 0.85rem; color: var(--muted);">Sprint 55 BC UAT unblocked on staging — real momentum</td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/41314899279" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                            <tr>
+                                <td>TEGH Rubber EUDR</td>
+                                <td><span class="warning">Unassigned</span></td>
+                                <td>Jun 30</td>
+                                <td style="text-align: right;">$70,980</td>
+                                <td style="font-size: 0.85rem; color: var(--red);">No owner driving this</td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/16712766109" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                            <tr>
+                                <td>Patum Oil</td>
+                                <td><span class="warning">Unassigned</span></td>
+                                <td>Jun 1</td>
+                                <td style="text-align: right;">$50,000</td>
+                                <td></td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/28990222356" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                            <tr>
+                                <td>Coproad</td>
+                                <td>HC Fleischer</td>
+                                <td>Jun 30</td>
+                                <td style="text-align: right;">$18,000</td>
+                                <td></td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/57865543947" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                            <tr>
+                                <td>Takasago (Vanilla & Patchouli) Indonesia</td>
+                                <td><span class="warning">Unassigned</span></td>
+                                <td>Jun 1</td>
+                                <td style="text-align: right;">$15,000</td>
+                                <td></td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/48116232013" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                            <tr>
+                                <td>Sucden CDW</td>
+                                <td>BD Lead</td>
+                                <td>Jun 30</td>
+                                <td style="text-align: right;">$14,000</td>
+                                <td></td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/16861368900" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                            <tr>
+                                <td>Envirium Life Sciences</td>
+                                <td><span class="warning">Unassigned</span></td>
+                                <td>Jun 1</td>
+                                <td style="text-align: right;">$15,000</td>
+                                <td></td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/28968382547" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                            <tr>
+                                <td>SOCFIN EUDR Africa</td>
+                                <td><span class="warning">Unassigned</span></td>
+                                <td>Jun 30</td>
+                                <td style="text-align: right;">$10,000</td>
+                                <td></td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/28964816510" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                            <tr>
+                                <td>Kallari Chocolate</td>
+                                <td><span class="warning">Unassigned</span></td>
+                                <td>Jun 1</td>
+                                <td style="text-align: right;">—</td>
+                                <td></td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/33083332722" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                            <tr>
+                                <td>Inovasi Digital</td>
+                                <td><span class="warning">Unassigned</span></td>
+                                <td>Jun 1</td>
+                                <td style="text-align: right;">—</td>
+                                <td></td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/28951704621" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Prospecting — AT RISK -->
+                    <h3 style="margin-top: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--red);">Prospecting <span class="warning" style="font-size: 0.8rem;">⚠️ AT RISK — earliest stage, closing soon</span></h3>
+                    <table>
+                        <thead>
+                            <tr><th>Deal Name</th><th>Owner</th><th>Close Date</th><th style="text-align: right;">Amount</th><th>Comment</th><th>Link</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>transcao CDI 12 coops</td>
+                                <td><span class="warning">Unassigned</span></td>
+                                <td>Jun 1</td>
+                                <td style="text-align: right;">$26,680</td>
+                                <td></td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/14429126311" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                            <tr>
+                                <td>transcao deforestation</td>
+                                <td><span class="warning">Unassigned</span></td>
+                                <td>Jun 1</td>
+                                <td style="text-align: right;">$10,000</td>
+                                <td></td>
+                                <td><a href="https://app.hubspot.com/contacts/8973110/record/0-3/14429217905" target="_blank" style="color: #0066cc;">↗</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Won / Lost This Week -->
+                    <h3 style="margin-top: 2rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border-light);">Won This Week (March 17–23)</h3>
+                    <p style="color: var(--muted); margin-bottom: 1.5rem;">None.</p>
+
+                    <h3 style="padding-bottom: 0.5rem; border-bottom: 2px solid var(--border-light);">Lost This Week (March 17–23)</h3>
+                    <table>
+                        <thead>
+                            <tr><th>Deal Name</th><th style="text-align: right;">Amount</th><th>Close Date</th><th>Note</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>TRACE Cocoa Nigeria</strong></td>
+                                <td style="text-align: right;"><strong>$50,000</strong></td>
+                                <td>Mar 17</td>
+                                <td style="font-size: 0.85rem; color: var(--red);">Biggest loss this week</td>
+                            </tr>
+                            <tr>
+                                <td>SeedTrace</td>
+                                <td style="text-align: right;">$5,400</td>
+                                <td>Mar 16</td>
+                                <td style="font-size: 0.85rem; color: var(--muted);">No loss reason logged</td>
+                            </tr>
+                            <tr>
+                                <td>Dormans Coffee</td>
+                                <td style="text-align: right;">—</td>
+                                <td>Mar 17</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Tas</td>
+                                <td style="text-align: right;">—</td>
+                                <td>Mar 17</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Sandalj Trading</td>
+                                <td style="text-align: right;">—</td>
+                                <td>Mar 17</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Lenmac</td>
+                                <td style="text-align: right;">—</td>
+                                <td>Mar 17</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="callout warning-box" style="margin-top: 1.5rem;">
+                        <p><strong>⚠️ Ownership Gap:</strong> 8+ deals in next quarter have NO owner. Over $1.1M unassigned. CCA Cotton Phase 1 ($524K) and BC Go Live 3 ($190K) are still at Engaged — needs acceleration.</p>
+                    </div>
+
+                    <div class="feedback-section">
+                        <label class="feedback-label">Feedback for Pipeline Health</label>
+                        <textarea class="feedback-textarea" data-section="pipeline-health" placeholder="Add your notes or observations here..."></textarea>
+                    </div>
+                </div>
+            </details>
+        </section>
+
+        <!-- SECTION 3: Revenue Forecast -->
+        <section id="revenue-forecast">
+            <details open>
+                <summary>Revenue Forecast — MRR Trajectory Toward $240K Target</summary>
+                <div class="section-content">
+
+                    <div class="metrics-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+                        <div class="metric-card">
+                            <div class="metric-label">Current MRR (Younium)</div>
+                            <div class="metric-value">$210,675</div>
+                            <div class="metric-note">NOK 2,315,112 × 0.091 USD/NOK — 112 accounts</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Target MRR — Dec 2026</div>
+                            <div class="metric-value" style="color: var(--gold);">$240,000</div>
+                            <div class="metric-note">End-of-year objective</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Gap to Close</div>
+                            <div class="metric-value" style="color: var(--red);">$29,325</div>
+                            <div class="metric-note">+14% MRR growth needed by Dec</div>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 2rem;">Month-by-Month MRR Projection (Sales Pipeline Only)</h3>
+                    <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.9rem;">Starting from Younium baseline ($210,675), adding MRR from Sales Pipeline deals (HubSpot <code>hs_mrr</code> field) as they close. Two scenarios: all deals close (optimistic) and probability-weighted forecast (<code>forecasted_recurring_revenue_amount</code>).</p>
+                    <table style="margin-bottom: 1.5rem;">
+                        <thead>
+                            <tr>
+                                <th>Month</th>
+                                <th style="text-align: right;">MRR Added</th>
+                                <th style="text-align: right;">Cumulative MRR (Total)</th>
+                                <th style="text-align: right;">Cumulative MRR (Weighted)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background-color: #f0ebe5;">
+                                <td><strong>Mar (now)</strong></td>
+                                <td style="text-align: right;">—</td>
+                                <td style="text-align: right;"><strong>$210,675</strong></td>
+                                <td style="text-align: right;"><strong>$210,675</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Apr</td>
+                                <td style="text-align: right;">$4,900</td>
+                                <td style="text-align: right;">$215,575</td>
+                                <td style="text-align: right;">$210,920</td>
+                            </tr>
+                            <tr>
+                                <td>May</td>
+                                <td style="text-align: right;">$4,190</td>
+                                <td style="text-align: right;">$219,765</td>
+                                <td style="text-align: right;">$214,092</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Jun</strong></td>
+                                <td style="text-align: right;"><strong>$63,510</strong></td>
+                                <td style="text-align: right;"><strong>$283,275</strong></td>
+                                <td style="text-align: right;">$221,513</td>
+                            </tr>
+                            <tr>
+                                <td>Jul</td>
+                                <td style="text-align: right;">$1,085</td>
+                                <td style="text-align: right;">$284,360</td>
+                                <td style="text-align: right;">$221,568</td>
+                            </tr>
+                            <tr>
+                                <td>Aug</td>
+                                <td style="text-align: right;">$2,978</td>
+                                <td style="text-align: right;">$287,338</td>
+                                <td style="text-align: right;">$221,954</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sep</strong></td>
+                                <td style="text-align: right;"><strong>$42,701</strong></td>
+                                <td style="text-align: right;"><strong>$330,039</strong></td>
+                                <td style="text-align: right;"><strong>$240,769</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Oct</td>
+                                <td style="text-align: right;">—</td>
+                                <td style="text-align: right;">$330,039</td>
+                                <td style="text-align: right;">$240,769</td>
+                            </tr>
+                            <tr>
+                                <td>Nov</td>
+                                <td style="text-align: right;">—</td>
+                                <td style="text-align: right;">$330,039</td>
+                                <td style="text-align: right;">$240,769</td>
+                            </tr>
+                            <tr style="font-weight: 700; background-color: #f0ebe5;">
+                                <td>Dec 2026</td>
+                                <td style="text-align: right;">—</td>
+                                <td style="text-align: right;">$330,039</td>
+                                <td style="text-align: right;">$240,769</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="callout">
+                        <p><strong>Takeaway:</strong> Current MRR is $210,675 — $29K short of the $240K target. Optimistic scenario (all Sales Pipeline deals close): we cross $240K in June and end at $330K. <strong>Weighted forecast: we just barely reach $240,769 in September — target met, but with zero margin.</strong> The June spike ($63.5K MRR) is driven by CCA Cotton Phase 1 ($27K MRR), Volcafe ($19.2K MRR), and TEGH Rubber ($5K MRR). September depends on UEBT ($34.3K MRR) and Nestlé ($8.5K MRR).</p>
+                    </div>
+
+                    <div class="feedback-section">
+                        <label class="feedback-label">Feedback for Revenue Forecast</label>
+                        <textarea class="feedback-textarea" data-section="revenue-forecast" placeholder="Add your notes or observations here..."></textarea>
+                    </div>
+                </div>
+            </details>
+        </section>
+
+        <!-- SECTION 4: Customer Pulse -->
+        <section id="customer-pulse">
+            <details open>
+                <summary>Customer Pulse</summary>
+                <div class="section-content">
+                    <p style="margin-bottom: 1.5rem; color: var(--muted);">This section tracks signals from your existing customer base — new contact additions, deal movement, engagement activity. Each signal represents a moment to compound trust or a risk to monitor.</p>
+
+                    <div class="signal-cards">
+                        <div class="signal-card new">
+                            <div class="signal-company"><span class="signal-badge">🔵</span>Barry Callebaut</div>
+                            <div class="signal-text">Phase 2 India won Feb 28 ($72.5K). Jo Van Dierdonck active this week. Sprint 55 Wolfram in progress for BC UAT.</div>
+                            <div class="signal-date">Mar 2026</div>
+                        </div>
+
+                        <div class="signal-card new">
+                            <div class="signal-company"><span class="signal-badge">🔵</span>Cargill</div>
+                            <div class="signal-text">New contact jayanta_hazarika@cargill.com added Mar 20. Judit Jakab active.</div>
+                            <div class="signal-date">Mar 20</div>
+                        </div>
+
+                        <div class="signal-card new">
+                            <div class="signal-company"><span class="signal-badge">🔵</span>Rubberway</div>
+                            <div class="signal-text">New contacts added Mar 20. Polygon Verification Module demo held Mar 11. Multiple renewals pending.</div>
+                            <div class="signal-date">Mar 20</div>
+                        </div>
+
+                        <div class="signal-card active">
+                            <div class="signal-company"><span class="signal-badge">🟢</span>Farm Africa</div>
+                            <div class="signal-text">Ethiopia PFMC EUDR Pilot active. Filagot Getahun, Feyisa Assefa active this week.</div>
+                            <div class="signal-date">Mar 2026</div>
+                        </div>
+
+                        <div class="signal-card deal">
+                            <div class="signal-company"><span class="signal-badge">📋</span>UEBT</div>
+                            <div class="signal-text">Jennifer Suti and rina@uebt.org active Mar 23. Partnership deal at Proposal ($411K).</div>
+                            <div class="signal-date">Mar 23</div>
+                        </div>
+
+                        <div class="signal-card deal">
+                            <div class="signal-company"><span class="signal-badge">🔵</span>SeedTrace</div>
+                            <div class="signal-text">Finn Rogge and Nina Pachur active Mar 23. Liberia handover deal at Proposal ($27.8K).</div>
+                            <div class="signal-date">Mar 23</div>
+                        </div>
+
+                        <div class="signal-card active">
+                            <div class="signal-company"><span class="signal-badge">🟢</span>RomEx</div>
+                            <div class="signal-text">Nilthon Neyra Roman active. Ecuador cocoa engagement ongoing.</div>
+                            <div class="signal-date">Mar 16</div>
+                        </div>
+                    </div>
+
+                    <div class="feedback-section">
+                        <label class="feedback-label">Feedback for Customer Pulse</label>
+                        <textarea class="feedback-textarea" data-section="customer-pulse" placeholder="Add your notes or observations here..."></textarea>
+                    </div>
+                </div>
+            </details>
+        </section>
+
+        <!-- SECTION 5: Prospect Activity -->
+        <section id="prospect-activity">
+            <details open>
+                <summary>Prospect Activity</summary>
+                <div class="section-content">
+                    <p style="margin-bottom: 1.5rem; color: var(--muted); font-style: italic;">
+                        <strong>Why this section exists:</strong> Prospects don't announce themselves. This tracks contacts who showed up or were touched this week — new leads, reactivated contacts, event-driven additions. In a long-cycle business (8–12 months to close), early signals compound. Spotting a contact at the right moment — before the competition does — is how deals start. If this section becomes noise, we trim it. For now, it's a radar.
+                    </p>
+
+                    <p style="margin-bottom: 1.5rem; color: var(--text); font-weight: 600;">104 contacts updated since March 16</p>
+
+                    <div class="contact-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Contact</th>
+                                    <th>Company</th>
+                                    <th>Date</th>
+                                    <th>Signal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Narcisse MOBIO</td>
+                                    <td>CASODU COOP CA</td>
+                                    <td>Mar 23</td>
+                                    <td>New contact added</td>
+                                </tr>
+                                <tr>
+                                    <td>pc@ / assistant@</td>
+                                    <td>Ethical Chain</td>
+                                    <td>Mar 19</td>
+                                    <td>New organization</td>
+                                </tr>
+                                <tr>
+                                    <td>Arianna Bunello</td>
+                                    <td>Chloris Geospatial</td>
+                                    <td>Mar 17</td>
+                                    <td>Potential partner</td>
+                                </tr>
+                                <tr>
+                                    <td>Oskar Jönsson</td>
+                                    <td>Gebana</td>
+                                    <td>Mar 16</td>
+                                    <td>Coffee prospect</td>
+                                </tr>
+                                <tr>
+                                    <td>MARCELA ARRIETA + Manuel Valderrama</td>
+                                    <td>Bruma Cacao</td>
+                                    <td>Mar 19</td>
+                                    <td>Ecuador cocoa</td>
+                                </tr>
+                                <tr>
+                                    <td>Roy Porras Espinoza</td>
+                                    <td>CACAO PERU GROUP</td>
+                                    <td>Mar 18</td>
+                                    <td>Peru cocoa</td>
+                                </tr>
+                                <tr>
+                                    <td>JOSETTE SEKONGO</td>
+                                    <td>ACC CI</td>
+                                    <td>Mar 18</td>
+                                    <td>Côte d'Ivoire</td>
+                                </tr>
+                                <tr>
+                                    <td>Odd Arnesen</td>
+                                    <td>Ministry of Foreign Affairs (Norway)</td>
+                                    <td>Mar 18</td>
+                                    <td>Government contact</td>
+                                </tr>
+                                <tr>
+                                    <td>Remie Matta</td>
+                                    <td>A&D Trading</td>
+                                    <td>Mar 19</td>
+                                    <td>Ecuador prospect</td>
+                                </tr>
+                                <tr>
+                                    <td>Iliana Valdiviezo</td>
+                                    <td>Beyond Beans (ETG)</td>
+                                    <td>Mar 18</td>
+                                    <td>Ecuador cocoa</td>
+                                </tr>
+                                <tr>
+                                    <td>Oscar Kimaro, Yohane Kaduma</td>
+                                    <td>PASS Trust</td>
+                                    <td>Mar 18</td>
+                                    <td>Tanzania</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="feedback-section">
+                        <label class="feedback-label">Feedback for Prospect Activity</label>
+                        <textarea class="feedback-textarea" data-section="prospect-activity" placeholder="Add your notes or observations here..."></textarea>
+                    </div>
+                </div>
+            </details>
+        </section>
+
+        <!-- SECTION 6: Data Quality Flags -->
+        <section id="data-quality">
+            <details open>
+                <summary>Data Quality Flags</summary>
+                <div class="section-content">
+                    <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                        <li><strong>8 deals with NO owner:</strong> $1.1M+ unowned pipeline (Volcafe $259K, TEGH $71K, Patum Oil $50K, SIAT Palm $21K, +more)</li>
+                        <li><strong>Wacot Nigeria:</strong> Close date Oct 31, 2025 — 5 months overdue</li>
+                        <li><strong>Supply Chain Level:</strong> Populated on &lt;1% of companies</li>
+                        <li><strong>47 renewal deals:</strong> Past-due close dates</li>
+                        <li><strong>Company fill rates:</strong> Crops 40% | Segment 25% | ICP Tier 24%</li>
+                    </ul>
+
+                    <div class="feedback-section">
+                        <label class="feedback-label">Feedback for Data Quality</label>
+                        <textarea class="feedback-textarea" data-section="data-quality" placeholder="Add your notes or observations here..."></textarea>
+                    </div>
+                </div>
+            </details>
+        </section>
+
+        <!-- SECTION 7: Industry & Competitor Watch -->
+        <section id="industry-watch">
+            <details open>
+                <summary>Industry & Competitor Watch (March 16–23)</summary>
+                <div class="section-content">
+                    <p style="margin-bottom: 1.5rem; color: var(--muted);">Strategic market signals — curated to what matters most for Farmforce pipeline and positioning.</p>
+
+                    <h4 style="margin-bottom: 0.75rem;">Market & Regulation</h4>
+                    <table style="margin-bottom: 2rem;">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Headline</th>
+                                <th>Source</th>
+                                <th>Why It Matters</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mar 2026</td>
+                                <td><strong>EUDR April Review looms — Commission holds the line despite US pushback</strong></td>
+                                <td><a href="https://cocoaradar.com/eudr-april-review-looms-as-commission-holds-the-line-in-face-of-us-pushback/" target="_blank" style="color: var(--gold);">CocoaRadar</a></td>
+                                <td>The April 30 simplification review is weeks away. Commission says no reopening of the core text — "targeted tweaks" only. This is the single most important regulatory event for our pipeline this quarter.</td>
+                            </tr>
+                            <tr>
+                                <td>Mar 2026</td>
+                                <td><strong>The SHIFT Project formally launched</strong> — new coalition for cocoa supply chain transformation</td>
+                                <td><a href="https://www.linkedin.com/posts/antonie_formally-launched-this-week-the-shift-project-activity-7440684494275276800-5CQY" target="_blank" style="color: var(--gold);">LinkedIn / Antonie</a></td>
+                                <td>New multi-stakeholder initiative. Antonie Fountain (VOICE Network / Cocoa Barometer) behind it — major credibility in the sector. Watch for alignment or competitive framing around traceability standards.</td>
+                            </tr>
+                            <tr>
+                                <td>Mar 18</td>
+                                <td>Cocoa prices climb to $3,349/t following market collapse recovery</td>
+                                <td><a href="https://www.confectionerynews.com/Article/2026/03/18/cocoa-prices-climb-following-market-collapse/" target="_blank" style="color: var(--gold);">Confectionery News</a></td>
+                                <td>Price stabilization. Clients who paused traceability investments during volatility may start unlocking budgets. Watch for pipeline acceleration.</td>
+                            </tr>
+                            <tr>
+                                <td>Mar 18</td>
+                                <td>Barry Callebaut, Mondelez, Lindt reshaping chocolate with cocoa alternatives</td>
+                                <td><a href="https://www.confectionerynews.com/Article/2026/03/18/future-chocolate-mondelez-lindt-and-barry-callebaut-adapt/" target="_blank" style="color: var(--gold);">Confectionery News</a></td>
+                                <td>Key customer BC future-proofing its portfolio. Cocoa substitution trend may shift the market, but traceability remains core for sourcing.</td>
+                            </tr>
+                            <tr>
+                                <td>Mar 2026</td>
+                                <td>Fairtrade price reset: Minimum Price rises 45% to $3,500/t from Oct 2026</td>
+                                <td><a href="https://cocoaradar.com/fairtrade-price-reset-and-tonys-open-chain-signal-new-momentum-on-cocoa-farmer-incomes/" target="_blank" style="color: var(--gold);">CocoaRadar</a></td>
+                                <td>Higher floor prices change economics for L1/L2 buyers. Coops need better data for Fairtrade compliance — that's a Farmforce selling point.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 style="margin-bottom: 0.75rem;">Competitor Signals</h4>
+                    <table style="margin-bottom: 1.5rem;">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Competitor</th>
+                                <th>Signal</th>
+                                <th>Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-left: 3px solid #dc3545;">
+                                <td>Feb 12</td>
+                                <td><strong>Koltiva</strong></td>
+                                <td><a href="https://agreads.com/2026/02/12/koltiva-pioneers-ai-powered-food-supply-chain-visibility-for-smallholder-farmers/" target="_blank" style="color: var(--gold);">Pioneers AI-powered supply chain visibility</a></td>
+                                <td>Adding AI to traceability, expanding ESG automation. Directly overlaps with Farmforce in Indonesia/SE Asia.</td>
+                            </tr>
+                            <tr style="border-left: 3px solid #dc3545;">
+                                <td>Feb 5</td>
+                                <td><strong>Koltiva</strong></td>
+                                <td><a href="https://agrotech.space/2026/02/05/koltiva-ai-traceability-pilot-esg/amp/" target="_blank" style="color: var(--gold);">AI traceability pilot with AI Singapore + SUGATA</a></td>
+                                <td>Coffee/cocoa pilot in Indonesia — direct overlap with Farmforce territory.</td>
+                            </tr>
+                            <tr style="border-left: 3px solid #dc3545;">
+                                <td>Feb 2026</td>
+                                <td><strong>Dimitra</strong></td>
+                                <td><a href="https://www.prnewswire.com/news-releases/dimitra-and-mantra-partner-to-tokenize-real-world-agricultural-assets-for-real-impact-302466277.html" target="_blank" style="color: var(--gold);">Partners with MANTRA to tokenize agricultural assets</a></td>
+                                <td>Blockchain + RWA tokenization angle. Different tech approach, but competing for the same "data from farm" narrative.</td>
+                            </tr>
+                            <tr style="border-left: 3px solid #dc3545;">
+                                <td>2026</td>
+                                <td><strong>SAP</strong></td>
+                                <td><a href="https://community.sap.com/t5/technology-blog-posts-by-sap/sap-sustainability-control-tower-product-updates-hy2-2025-and-road-map/ba-p/14321062" target="_blank" style="color: var(--gold);">Sustainability Control Tower expanding regulatory coverage</a></td>
+                                <td>Enterprise clients may default to SAP for EUDR compliance. Risk: L3 accounts that already run SAP could bypass Farmforce entirely.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="feedback-section">
+                        <label class="feedback-label">Feedback for Industry Watch</label>
+                        <textarea class="feedback-textarea" data-section="industry-watch" placeholder="Add your notes or observations here..."></textarea>
+                    </div>
+                </div>
+            </details>
+        </section>
+
+        <!-- SECTION 8: Product & Technical Updates -->
+        <section id="product-updates">
+            <details open>
+                <summary>Product & Technical Updates (March 16–23)</summary>
+                <div class="section-content">
+                    <table style="margin-bottom: 1.5rem;">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Update</th>
+                                <th>Details</th>
+                                <th>Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mar 19</td>
+                                <td><strong>Orbit 0.9.33-r7 Released</strong></td>
+                                <td>Case Management: survey version checking for task completion, Task 2 auto-closing fix, survey responses preserved after edit/sync</td>
+                                <td><a href="https://farmforce.atlassian.net/wiki/spaces/FIW/pages/12655689734/Release+Notes+-+Orbit+-+0.9.33-r7+-+Mar+19+17+00+CET" target="_blank" style="color: var(--gold);">Confluence</a></td>
+                            </tr>
+                            <tr>
+                                <td>Mar 17</td>
+                                <td><strong>Polygon Verification Module — Prototype Updated</strong></td>
+                                <td>Validation Platform for Rubberway: GeoJSON batch upload, spatial auto-fixes, Supplier/Buyer user roles. Based on Mar 11 demo.</td>
+                                <td><a href="https://farmforce.atlassian.net/wiki/spaces/TECH/pages/12580945929/Validation+platform+product+description" target="_blank" style="color: var(--gold);">Confluence</a></td>
+                            </tr>
+                            <tr>
+                                <td>Mar 16</td>
+                                <td><strong>Sprint 55 Wolfram — Retro & Planning</strong></td>
+                                <td>BC UAT unblocked on staging, procurement view filters for UAT, Origin 90 release management</td>
+                                <td><a href="https://farmforce.atlassian.net/wiki/spaces/ORIGIN/pages/12652183558/2026-03-16+Sprint+55+-+Wolfram+-+Retrospective+Planning+Notes" target="_blank" style="color: var(--gold);">Confluence</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="feedback-section">
+                        <label class="feedback-label">Feedback for Product Updates</label>
+                        <textarea class="feedback-textarea" data-section="product-updates" placeholder="Add your notes or observations here..."></textarea>
+                    </div>
+                </div>
+            </details>
+        </section>
+
+        <!-- SECTION 9: Shade's Top 3 -->
+        <section id="shades-top3">
+            <details open>
+                <summary>Shade's Top 3</summary>
+                <div class="section-content">
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="margin-top: 0;">1. The $1.1M Orphan Problem</h3>
+                        <p style="color: var(--text); margin-bottom: 0.75rem;">
+                            8 open deals worth over <strong>$1.1M have no owner</strong>. Volcafe ($259K), TEGH Rubber ($71K), Patum Oil ($50K), SIAT Palm ($21K), and more.
+                        </p>
+                        <p style="color: var(--muted); font-style: italic;">
+                            <strong>Because:</strong> Unowned deals are invisible deals. Takes 10 minutes to assign, could unlock six figures.
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="margin-top: 0;">2. Barry Callebaut Is Your Engine — Protect It</h3>
+                        <p style="color: var(--text); margin-bottom: 0.75rem;">
+                            <strong>$1.7M across 4 active phases</strong> plus Sprint 55 in progress and Polygon Verification Module demoed. <strong>28% of total pipeline</strong>. Jo Van Dierdonck active this week.
+                        </p>
+                        <p style="color: var(--muted); font-style: italic;">
+                            <strong>Because:</strong> Phase 2 India win ($72.5K) proves the expansion model works. Guard it.
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="margin-top: 0;">3. EUDR Delay = Window, Not Excuse</h3>
+                        <p style="color: var(--text); margin-bottom: 0.75rem;">
+                            Large operators now Dec 30, 2026. Koltiva just launched an AI traceability pilot. Fairtrade's <strong>45% price reset</strong> creates a new angle.
+                        </p>
+                        <p style="color: var(--muted); font-style: italic;">
+                            <strong>Because:</strong> Every delay cools urgency. Flip the narrative. Barometer data: 45% of producers still on analog.
+                        </p>
+                    </div>
+
+                    <div class="feedback-section">
+                        <label class="feedback-label">Feedback for Shade's Top 3</label>
+                        <textarea class="feedback-textarea" data-section="shades-top3" placeholder="Add your notes or observations here..."></textarea>
+                    </div>
+                </div>
+            </details>
+        </section>
+
+        <!-- Export Section -->
+        <div class="export-container">
+            <button class="export-btn" onclick="exportFeedback()">📥 Export All Feedback as JSON</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-credit">Shade — Farmforce Marketing Intelligence</div>
+            <div class="footer-credit">Powered by Claude • Built by Monsanto (a.k.a. Arnaud Dupuis)</div>
+            <div class="footer-meta">Week of March 23, 2026 • v1.0</div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation & Intersection Observer for active state
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section');
+
+        const observerOptions = {
+            rootMargin: '-50% 0px -50% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach((link) => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach((section) => {
+            observer.observe(section);
+        });
+
+        // Smooth scroll with offset for fixed nav
+        navLinks.forEach((link) => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Export feedback as JSON
+        function exportFeedback() {
+            const feedbackElements = document.querySelectorAll('.feedback-textarea');
+            const feedback = {};
+
+            feedbackElements.forEach((textarea) => {
+                const section = textarea.getAttribute('data-section');
+                const text = textarea.value.trim();
+                if (text) {
+                    feedback[section] = text;
+                }
+            });
+
+            const reportData = {
+                report: 'The Unshaded Report #1 — Week of March 23, 2026',
+                version: 'v1.0',
+                exportedAt: new Date().toISOString(),
+                feedback: feedback
+            };
+
+            const dataStr = JSON.stringify(reportData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `Unshaded_Report_Feedback_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
